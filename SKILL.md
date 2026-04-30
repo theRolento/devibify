@@ -1,11 +1,11 @@
 ---
 name: devibify
-description: "Prevent vibe-coded, generic AI-looking frontend UI. Use when generating, reviewing, refactoring, or polishing HTML, CSS, React, Vue, Svelte/SvelteKit, dashboards, landing pages, product UI, components, forms, tables, or styling so the result has disciplined design systems, specific copy, working interactions, responsive behavior, loading states, accessibility, and production-ready verification."
+description: "Guide frontend UI work away from generic AI-looking or vibe-coded output. Use when generating, reviewing, refactoring, or polishing HTML, CSS, React, Vue, Svelte/SvelteKit, dashboards, landing pages, product UI, components, forms, tables, or styling by applying design-system discipline, specific copy, working interactions, responsive behavior, loading and error states, accessibility checks, and production-ready verification."
 ---
 
 # Devibify
 
-Devibify turns frontend work into intentional product design instead of rushed vibe-coded output. Use it as a strict design and implementation workflow for UI that must feel calm, consistent, useful, and production-ready.
+Devibify helps steer frontend work toward intentional product design and away from rushed vibe-coded output. Use it as a strict design and implementation workflow for UI that must feel calm, consistent, useful, and production-ready.
 
 ## Primary Operating Standard
 

@@ -1,8 +1,8 @@
 # Devibify
 
-Devibify is a Codex skill for building and reviewing frontend UI without the usual vibe-coded tells: random gradients, decorative emoji, fake proof, inconsistent spacing, broken responsiveness, dead controls, missing loading states, and generic copy.
+Devibify is a Codex skill for building and reviewing frontend UI with a stricter product-design checklist, helping reduce the usual vibe-coded tells: random gradients, decorative emoji, fake proof, inconsistent spacing, broken responsiveness, dead controls, missing loading states, and generic copy.
 
-It turns UI work into a stricter product-design workflow: inspect the existing codebase, define a compact UI contract, reuse or establish a small design system, implement real states and interactions, then verify responsive behavior, accessibility basics, and technical polish before calling the work done.
+It guides UI work through a stricter product-design workflow: inspect the existing codebase, define a compact UI contract, reuse or establish a small design system, implement real states and interactions, then verify responsive behavior, accessibility basics, and technical polish before calling the work done.
 
 ## Install
 
@@ -13,12 +13,12 @@ The installed folder should contain `SKILL.md` at its top level. Keep the `agent
 After installing, invoke it in Codex with:
 
 ```text
-Use $devibify to redesign this page so it feels intentional, consistent, and production-ready.
+Use $devibify to review and refine this UI so it avoids vibe-coded tells and feels intentional, consistent, and production-ready.
 ```
 
 ## What It Includes
 
-- A self-contained `SKILL.md` with the full no-vibe-coding workflow.
+- A self-contained `SKILL.md` with the vibe-code avoidance workflow.
 - A merged UI quality guide covering tokens, primitives, copy, layout, interaction states, accessibility, and verification.
 - A vibe-coded website diagnostic report used as the main red-flag checklist.
 - Optional skill UI metadata in `agents/openai.yaml`.

@@ -1,4 +1,4 @@
 interface:
   display_name: "Devibify"
-  short_description: "Remove vibe-coded UI tells"
-  default_prompt: "Use $devibify to redesign this UI so it feels intentional, consistent, and production-ready."
+  short_description: "Guide against vibe-coded UI tells"
+  default_prompt: "Use $devibify to review and refine this UI so it avoids vibe-coded tells and feels intentional, consistent, and production-ready."
