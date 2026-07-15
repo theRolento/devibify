@@ -1,0 +1,230 @@
+[
+  {
+    "id": "trigger-audit-dashboard",
+    "query": "Audit this dashboard for generic AI structure, accessibility failures, and missing interaction states. Return findings only and do not change files.",
+    "should_trigger": true,
+    "notes": "Read-only product and UX audit."
+  },
+  {
+    "id": "trigger-refactor-dashboard",
+    "query": "Refactor the operations dashboard to reuse our existing components, clarify hierarchy, and work at narrow and intermediate widths.",
+    "should_trigger": true,
+    "notes": "Design-system and responsive judgment are material."
+  },
+  {
+    "id": "trigger-settings-form",
+    "query": "Implement the notification settings form with validation, pending, server error, and success states.",
+    "should_trigger": true,
+    "notes": "Stateful form implementation."
+  },
+  {
+    "id": "trigger-specific-landing",
+    "query": "Make this landing page feel specific to our scheduling product instead of a generic AI SaaS template, without inventing customer proof.",
+    "should_trigger": true,
+    "notes": "Product specificity and content integrity."
+  },
+  {
+    "id": "trigger-reference-review",
+    "query": "Compare the running checkout page with the supplied Figma frame and fix fidelity, behavior, and responsive differences.",
+    "should_trigger": true,
+    "notes": "Reference-fidelity work."
+  },
+  {
+    "id": "trigger-mobile-table",
+    "query": "Make this dense invoice table usable on mobile without losing row-to-column comparison.",
+    "should_trigger": true,
+    "notes": "Responsive data relationship design."
+  },
+  {
+    "id": "trigger-onboarding-design-system",
+    "query": "Design a new onboarding flow using the existing design system and real account setup steps.",
+    "should_trigger": true,
+    "notes": "Net-new flow with established primitives."
+  },
+  {
+    "id": "trigger-dialog-accessibility",
+    "query": "Fix the dialog keyboard order, focus containment and return, and Escape dismissal.",
+    "should_trigger": true,
+    "notes": "Custom interaction accessibility."
+  },
+  {
+    "id": "trigger-release-ui-pass",
+    "query": "Run a product-quality UI pass on the billing flow before release and verify the reachable states.",
+    "should_trigger": true,
+    "notes": "Cross-domain product-quality verification."
+  },
+  {
+    "id": "trigger-remove-fake-proof",
+    "query": "Remove unsupported testimonials, customer logos, avatars, and metrics from the marketing page and repair the resulting hierarchy.",
+    "should_trigger": true,
+    "notes": "Evidence integrity plus visible composition."
+  },
+  {
+    "id": "trigger-search-states",
+    "query": "Implement loading, empty, no-results, error, retry, stale, and offline states for product search.",
+    "should_trigger": true,
+    "notes": "Reachable asynchronous state design."
+  },
+  {
+    "id": "trigger-consent-audit",
+    "query": "Audit the subscription consent UI for keyboard access, clear recurring costs, and manipulative patterns.",
+    "should_trigger": true,
+    "notes": "Accessibility and deceptive-design audit."
+  },
+  {
+    "id": "trigger-shared-component",
+    "query": "Refactor the shared combobox without breaking its consumers, keyboard behavior, or error states.",
+    "should_trigger": true,
+    "notes": "Shared UI blast radius and accessibility."
+  },
+  {
+    "id": "trigger-chart-truth",
+    "query": "Audit this analytics dashboard for truthful chart scales, data provenance, missing-data behavior, and accessible summaries.",
+    "should_trigger": true,
+    "notes": "Data visualization product audit."
+  },
+  {
+    "id": "trigger-explicit-narrow",
+    "query": "Use $devibify to correct the focus and pending states on this one Save button only.",
+    "should_trigger": true,
+    "notes": "Explicit invocation always triggers with proportional scope."
+  },
+  {
+    "id": "trigger-mixed-api-ui",
+    "query": "Add the search endpoint and then build its accessible results UI with loading, permission, and retry behavior.",
+    "should_trigger": true,
+    "notes": "Activate for the UI portion of mixed work."
+  },
+  {
+    "id": "trigger-maximalist-brand",
+    "query": "Improve responsiveness and usability of this intentionally maximalist campaign page while preserving its art direction.",
+    "should_trigger": true,
+    "notes": "Brand-sensitive UI work without minimalist flattening."
+  },
+  {
+    "id": "trigger-prototype-fixtures",
+    "query": "Prototype a reporting interface with clearly labelled synthetic data while the API contract is still unknown.",
+    "should_trigger": true,
+    "notes": "Fixture discipline in a net-new UI."
+  },
+  {
+    "id": "trigger-audit-no-browser",
+    "query": "Audit the account UI even though this environment has no browser; separate source findings from unverified runtime behavior.",
+    "should_trigger": true,
+    "notes": "Tool absence does not prevent bounded audit behavior."
+  },
+  {
+    "id": "trigger-screenshot-fidelity",
+    "query": "Use the attached screenshot as the authoritative reference for this route and verify it at the same viewport plus responsive widths.",
+    "should_trigger": true,
+    "notes": "Supplied design reference selects fidelity mode."
+  },
+  {
+    "id": "no-trigger-database-migration",
+    "query": "Add a database migration for the invoice status column.",
+    "should_trigger": false,
+    "notes": "Backend-only schema work."
+  },
+  {
+    "id": "no-trigger-rename-function",
+    "query": "Rename the TypeScript function parseRecord to parseEntry everywhere.",
+    "should_trigger": false,
+    "notes": "Mechanical code rename."
+  },
+  {
+    "id": "no-trigger-api-serializer",
+    "query": "Update the API serializer to include the new database field.",
+    "should_trigger": false,
+    "notes": "Backend serialization work."
+  },
+  {
+    "id": "no-trigger-markdown-proofread",
+    "query": "Proofread this Markdown paragraph for grammar and punctuation.",
+    "should_trigger": false,
+    "notes": "Copy-only work without UI context."
+  },
+  {
+    "id": "no-trigger-exact-token",
+    "query": "Change --space-3 from 10px to the specified 12px value and make no other edits.",
+    "should_trigger": false,
+    "notes": "Exact isolated token substitution."
+  },
+  {
+    "id": "no-trigger-lockfile",
+    "query": "Update the lockfile after the dependency bump.",
+    "should_trigger": false,
+    "notes": "Package bookkeeping."
+  },
+  {
+    "id": "no-trigger-non-ui-test",
+    "query": "Write unit tests for the date parsing utility.",
+    "should_trigger": false,
+    "notes": "Non-UI utility testing."
+  },
+  {
+    "id": "no-trigger-sql-query",
+    "query": "Optimize this SQL query and explain the new index plan.",
+    "should_trigger": false,
+    "notes": "Database performance work."
+  },
+  {
+    "id": "no-trigger-compress-images",
+    "query": "Compress these PNG files without changing dimensions or their use in the UI.",
+    "should_trigger": false,
+    "notes": "Mechanical asset optimization."
+  },
+  {
+    "id": "no-trigger-exact-label",
+    "query": "Replace the button text 'Continue' with the exact approved label 'Review order' and do no broader review.",
+    "should_trigger": false,
+    "notes": "Specified copy substitution without product-design judgment."
+  },
+  {
+    "id": "no-trigger-formatter",
+    "query": "Run the configured formatter on the source tree.",
+    "should_trigger": false,
+    "notes": "Mechanical formatting."
+  },
+  {
+    "id": "no-trigger-backend-auth",
+    "query": "Fix the server-side refresh-token validation bug.",
+    "should_trigger": false,
+    "notes": "Backend authentication logic."
+  },
+  {
+    "id": "no-trigger-icon-asset",
+    "query": "Generate a single SVG icon asset from this exact path specification.",
+    "should_trigger": false,
+    "notes": "Isolated asset generation."
+  },
+  {
+    "id": "no-trigger-css-explanation",
+    "query": "Explain what CSS contain: layout paint does. Do not modify the product.",
+    "should_trigger": false,
+    "notes": "Concept explanation rather than product UI work."
+  },
+  {
+    "id": "no-trigger-dependency-versions",
+    "query": "Update dependency versions to the approved numbers without touching UI code.",
+    "should_trigger": false,
+    "notes": "Dependency maintenance without UI work."
+  },
+  {
+    "id": "no-trigger-env-variable",
+    "query": "Document the backend environment variable used by the mail worker.",
+    "should_trigger": false,
+    "notes": "Backend documentation."
+  },
+  {
+    "id": "no-trigger-json-schema",
+    "query": "Regenerate the JSON schema from the existing model with the repository generator.",
+    "should_trigger": false,
+    "notes": "Mechanical generated artifact workflow."
+  },
+  {
+    "id": "no-trigger-cli-help",
+    "query": "Fix the punctuation in the command-line help output.",
+    "should_trigger": false,
+    "notes": "Non-web copy change."
+  }
+]

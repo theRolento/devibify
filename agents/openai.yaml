@@ -1,4 +1,7 @@
 interface:
   display_name: "Devibify"
-  short_description: "Turn generic frontend UI into product design"
-  default_prompt: "Use $devibify to build or audit this interface as a coherent, responsive, accessible product surface."
+  short_description: "Build and audit product-specific web interfaces"
+  default_prompt: "Use $devibify to implement or audit this web interface within the requested scope, with product-specific decisions, complete reachable states, and evidence-based verification."
+
+policy:
+  allow_implicit_invocation: true

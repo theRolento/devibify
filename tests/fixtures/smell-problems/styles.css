@@ -1,0 +1,17 @@
+.field:focus {
+  outline: none;
+}
+
+.tile:hover {
+  width: 12rem;
+  margin-left: 1rem;
+}
+
+.palette {
+  color: #111111;
+  background: #222222;
+  border-color: #333333;
+  outline-color: #444444;
+  text-decoration-color: #555555;
+  box-shadow: 0 0 0 1px #666666;
+}
