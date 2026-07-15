@@ -31,7 +31,7 @@ Keep `SKILL.md` at the top of the installed `devibify` folder.
 
 The repository file `agents/openai.yaml` stores skill interface metadata inside the skill folder.
 
-This repository contains the runtime skill and its maintenance harness. Codex follows the routing in `SKILL.md`; tests and eval data do not enter a skill run unless a task opens or executes them.
+Install the whole repository folder. You do not need to remove or rearrange any files. During normal use, Codex starts with `SKILL.md` and opens supporting references when relevant. It does not automatically load the tests or eval data.
 
 ## Invoke
 
@@ -73,7 +73,9 @@ Each mode uses the same scope, evidence, and verification rules with effort prop
 - `tests/` covers the validator and every scanner rule with standard-library unit tests.
 - `evals/` records trigger expectations, behavior cases, critical gates, and the scoring rubric.
 
-The eval corpus specifies expected behavior. This repository has no runtime Codex evaluator, so it does not claim that a model has passed those cases. The validator checks eval structure and coverage.
+The eval corpus specifies expected behavior. This repository has no runtime Codex evaluator, so it does not claim that a model has passed those cases. The validator checks eval structure and coverage. These maintenance files belong in the source repository even though Codex does not need them during a skill run.
+
+Regular users do not need to run the assurance harness. It is included for maintainers, contributors, and anyone who wants to verify the repository.
 
 ## Validate
 
@@ -97,6 +99,10 @@ python scripts/scan-ui-smells.py <path> --strict
 ```
 
 The scanner reports findings without editing files. Default mode returns status 0 when it finds issues. Strict mode returns status 1 when it finds a high-confidence issue.
+
+## History
+
+See [CHANGELOG.md](CHANGELOG.md) for the v1 and v2 feature summaries.
 
 ## Attribution
 
