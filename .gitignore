@@ -1,2 +1,7 @@
 __pycache__/
 *.py[cod]
+
+# Local grill-with-docs artifacts
+CONTEXT.md
+CONTEXT-MAP.md
+**/docs/adr/
