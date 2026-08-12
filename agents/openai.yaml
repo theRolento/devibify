@@ -1,7 +1,7 @@
 interface:
   display_name: "Devibify"
-  short_description: "Build and audit product-specific web interfaces"
-  default_prompt: "Use $devibify to implement or audit this web interface within the requested scope, with product-specific decisions, complete reachable states, and evidence-based verification."
+  short_description: "Design, build, and audit product-specific web UI"
+  default_prompt: "Use $devibify to design, build, refactor, or audit this browser-visible web UI with an evidence-backed design thesis, complete reachable states, and bounded verification."
 
 policy:
   allow_implicit_invocation: true

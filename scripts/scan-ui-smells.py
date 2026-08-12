@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """Report conservative UI smell findings without modifying source files."""
 
 from __future__ import annotations
@@ -198,20 +197,20 @@ def scan(target: Path, color_threshold: int) -> tuple[list[Finding], int]:
     return findings, files_scanned
 
 
-def parse_args(argv: list[str]) -> argparse.Namespace:
+def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Report advisory UI smell findings.")
     parser.add_argument("path", help="file or directory to scan")
     parser.add_argument("--json", action="store_true", dest="json_output", help="emit machine-readable JSON")
     parser.add_argument("--strict", action="store_true", help="return 1 when high-confidence findings exist")
     parser.add_argument("--color-threshold", type=int, default=5, help="literal color count that prompts token review (default: 5)")
-    args = parser.parse_args(argv)
+    args = parser.parse_args()
     if args.color_threshold < 1:
         parser.error("--color-threshold must be at least 1")
     return args
 
 
-def main(argv: list[str] | None = None) -> int:
-    args = parse_args(sys.argv[1:] if argv is None else argv)
+def main() -> int:
+    args = parse_args()
     target = Path(args.path).expanduser()
     try:
         target = target.resolve(strict=True)

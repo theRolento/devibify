@@ -41,13 +41,12 @@ Treat a form as a recovery-oriented workflow, not a collection of styled fields.
 - Use backend idempotency guarantees when documented; do not invent them.
 - State destructive or financial consequences before commitment.
 
-## Authentication and sensitive fields
+## Authentication recovery
 
-- Allow paste and password managers and use correct autocomplete values.
-- Keep sensitive values out of logs and URLs.
-- Make reveal-password control state clear in its label and accessible name.
 - Let masking support correction.
 - Preserve as much work as safely possible across session expiry.
+
+Use `accessibility.md` for password-manager, paste, autocomplete, and reveal-control requirements. Use `content-evidence-ethics-and-safety.md` for sensitive-data handling.
 
 ## Multi-step forms
 

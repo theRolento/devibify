@@ -15,23 +15,13 @@ Devibify does not target backend-only work, mechanical frontend edits, copy proo
 
 ## Install
 
-Place this repository folder in the Codex skills directory:
+Install the whole repository at:
 
 ```text
 $CODEX_HOME/skills/devibify
 ```
 
-With the default Codex home directory, the path is:
-
-```text
-~/.codex/skills/devibify
-```
-
-Keep `SKILL.md` at the top of the installed `devibify` folder.
-
-The repository file `agents/openai.yaml` stores skill interface metadata inside the skill folder.
-
-Install the whole repository folder. You do not need to remove or rearrange any files. During normal use, Codex starts with `SKILL.md` and opens supporting references when relevant. It does not automatically load the tests or eval data.
+The default location is `~/.codex/skills/devibify`. Keep the repository structure intact. Codex starts with `SKILL.md` and loads supporting references when relevant; tests and eval data remain maintenance assets.
 
 ## Invoke
 
@@ -45,18 +35,7 @@ The skill also allows implicit invocation for matching frontend work. Its descri
 
 ## Operating modes
 
-Devibify selects one primary mode before broad inspection or modification:
-
-| Mode | Purpose |
-|---|---|
-| `AUDIT` | Inspect and report without modifying product files |
-| `NARROW_FIX` | Correct one defined surface or defect |
-| `FEATURE_IMPLEMENTATION` | Add or change a page, flow, component family, or behavior |
-| `NET_NEW_DESIGN` | Design a new interface without an established reference |
-| `REFACTOR` | Improve structure while preserving accepted behavior and visual intent |
-| `REFERENCE_FIDELITY` | Implement against an approved screenshot, design, or specification |
-
-Each mode uses the same scope, evidence, and verification rules with effort proportional to the task.
+See the [mode definitions and selection rules](SKILL.md#select-the-mode) in `SKILL.md`.
 
 ## Repository layout
 
@@ -86,8 +65,6 @@ python scripts/validate-devibify.py .
 python scripts/validate-devibify.py . --json
 python -m unittest discover -s tests -p 'test_*.py'
 python -m py_compile scripts/validate-devibify.py scripts/scan-ui-smells.py
-python -m json.tool evals/trigger-cases.json >/dev/null
-python -m json.tool evals/behavior-cases.json >/dev/null
 ```
 
 Scan supported UI source files with:

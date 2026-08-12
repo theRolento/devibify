@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """Validate the Devibify source package without modifying it."""
 
 from __future__ import annotations
@@ -33,7 +32,6 @@ REQUIRED_FILES = [
     "scripts/scan-ui-smells.py",
     "evals/trigger-cases.json",
     "evals/behavior-cases.json",
-    "evals/behavior-rubric.md",
     "tests/test_validate_devibify.py",
     "tests/test_scan_ui_smells.py",
 ]
@@ -160,9 +158,9 @@ class Validator:
             return None
         fields: dict[str, str] = {}
         for number, line in enumerate(lines[1:closing], start=2):
-            match = re.fullmatch(r"([A-Za-z0-9_-]+):\s*(.*)", line)
+            match = re.fullmatch(r"(name|description):\s*(.*)", line)
             if not match:
-                self.error(path, number, "skill.frontmatter-syntax", "frontmatter must use simple key/value fields")
+                self.error(path, number, "skill.frontmatter-keys", "frontmatter may contain only name and description")
                 continue
             key, raw_value = match.groups()
             if key in fields:
@@ -221,61 +219,33 @@ class Validator:
 
         self._validate_links("SKILL.md", text, require_root_direct=True)
 
-    def _parse_openai_yaml(self, text: str) -> dict[str, Any] | None:
-        result: dict[str, Any] = {}
-        section: str | None = None
-        for number, raw_line in enumerate(text.splitlines(), start=1):
-            if not raw_line.strip():
-                continue
-            top = re.fullmatch(r"([A-Za-z_][\w-]*):", raw_line)
-            if top:
-                section = top.group(1)
-                result[section] = {}
-                continue
-            item = re.fullmatch(r"  ([A-Za-z_][\w-]*):\s*(.+)", raw_line)
-            if not item or section is None:
-                self.error("agents/openai.yaml", number, "openai.syntax", "unexpected YAML structure")
-                continue
-            key, raw_value = item.groups()
-            if raw_value in {"true", "false"}:
-                value: Any = raw_value == "true"
-            elif raw_value.startswith('"') and raw_value.endswith('"'):
-                try:
-                    value = json.loads(raw_value)
-                except json.JSONDecodeError:
-                    self.error("agents/openai.yaml", number, "openai.quoted-string", "invalid quoted string")
-                    value = ""
-            else:
-                self.error("agents/openai.yaml", number, "openai.quoted-string", "string values must be double quoted")
-                value = raw_value
-            result[section][key] = value
-        return result
-
     def _validate_openai(self, text: str | None) -> None:
         if text is None:
             return
-        data = self._parse_openai_yaml(text)
-        if data is None:
+        match = re.fullmatch(
+            r'interface:\n'
+            r'  display_name: ("(?:[^"\\]|\\.)*")\n'
+            r'  short_description: ("(?:[^"\\]|\\.)*")\n'
+            r'  default_prompt: ("(?:[^"\\]|\\.)*")\n\n'
+            r'policy:\n'
+            r'  allow_implicit_invocation: (true|false)\n?',
+            text,
+        )
+        if not match:
+            self.error("agents/openai.yaml", 1, "openai.syntax", "metadata must match the interface and policy schema")
             return
-        interface = data.get("interface", {})
-        policy = data.get("policy", {})
-        for key in ("display_name", "short_description", "default_prompt"):
-            if not isinstance(interface.get(key), str) or not interface[key]:
+        try:
+            display_name, short, prompt = (json.loads(value) for value in match.groups()[:3])
+        except json.JSONDecodeError:
+            self.error("agents/openai.yaml", 1, "openai.quoted-string", "invalid quoted string")
+            return
+        for key, value in (("display_name", display_name), ("short_description", short), ("default_prompt", prompt)):
+            if not value:
                 self.error("agents/openai.yaml", 1, f"openai.{key}", f"interface.{key} must exist")
-        short = interface.get("short_description", "")
-        if isinstance(short, str) and not 25 <= len(short) <= 64:
+        if not 25 <= len(short) <= 64:
             self.error("agents/openai.yaml", 1, "openai.short-description-length", "short_description must be 25 to 64 characters")
-        prompt = interface.get("default_prompt", "")
-        if isinstance(prompt, str) and "$devibify" not in prompt:
+        if "$devibify" not in prompt:
             self.error("agents/openai.yaml", 1, "openai.default-prompt", "default_prompt must include $devibify")
-        if not isinstance(policy.get("allow_implicit_invocation"), bool):
-            self.error("agents/openai.yaml", 1, "openai.implicit-invocation", "allow_implicit_invocation must be a boolean")
-        allowed_top = {"interface", "policy"}
-        if set(data) - allowed_top or set(interface) - {"display_name", "short_description", "default_prompt"} or set(policy) - {"allow_implicit_invocation"}:
-            self.error("agents/openai.yaml", 1, "openai.unsupported-field", "unsupported metadata or dependency field is present")
-        for key, value in interface.items():
-            if "icon" in key and isinstance(value, str) and not (self.root / value).is_file():
-                self.error("agents/openai.yaml", 1, "openai.missing-icon", f"icon asset does not exist: {value}")
 
     def _validate_links(self, relative: str, text: str, require_root_direct: bool = False) -> None:
         source = self.root / relative
@@ -402,15 +372,15 @@ class Validator:
             self.error(behavior_path, 1, "evals.behavior-array", "behavior cases must be a JSON array")
 
 
-def parse_args(argv: list[str]) -> argparse.Namespace:
+def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Validate the Devibify source package.")
     parser.add_argument("skill_directory", nargs="?", help="skill directory; defaults to the script's parent directory")
     parser.add_argument("--json", action="store_true", dest="json_output", help="emit machine-readable JSON")
-    return parser.parse_args(argv)
+    return parser.parse_args()
 
 
-def main(argv: list[str] | None = None) -> int:
-    args = parse_args(sys.argv[1:] if argv is None else argv)
+def main() -> int:
+    args = parse_args()
     default_root = Path(__file__).resolve().parent.parent
     root = Path(args.skill_directory).expanduser() if args.skill_directory else default_root
     try:

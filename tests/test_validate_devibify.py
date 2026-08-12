@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import importlib.util
 import json
+import re
 import shutil
 import subprocess
 import sys
@@ -96,7 +97,7 @@ class ValidatorTests(unittest.TestCase):
     def test_short_description_outside_range_fails(self) -> None:
         path = self.skill / "agents" / "openai.yaml"
         text = path.read_text(encoding="utf-8")
-        text = text.replace('short_description: "Build and audit product-specific web interfaces"', 'short_description: "Too short"')
+        text = re.sub(r'(?m)^  short_description: ".*"$', '  short_description: "Too short"', text)
         path.write_text(text, encoding="utf-8")
         self.assert_rule(self.validate(), "openai.short-description-length")
 

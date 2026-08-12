@@ -63,44 +63,12 @@ Investigate these high-frequency defaults when they lack product rationale:
 
 Unusual, maximalist, or expressive styles pass when they are intentional, coherent, usable, and product-specific.
 
-## Components and interaction affordance
+## Specialized audit checks
 
-- Use real links and real controls with a clear action hierarchy.
-- Show current navigation location.
-- Make dialogs, menus, tabs, accordions, and disclosures behave according to their semantics.
-- Tie statuses, badges, counts, and freshness indicators to real state.
-- Cover reachable loading, empty, error, pending, success, disabled, selected, and permission states.
-- Provide usable touch targets, keyboard access, and visible focus.
-- Prevent decorative elements from impersonating data or functionality.
-
-Use `interaction-states.md`, `forms-and-validation.md`, or `tables-and-data-visualization.md` for detailed behavior.
-
-## Content integrity and product language
-
-- Use the domain's concrete nouns and actions.
-- Make labels describe the action and consequence.
-- Trace claims, proof, routes, contact details, legal text, and metadata to a source.
-- Label fixtures clearly and keep real-looking personal data out of them.
-- Remove internal prompt language and implementation commentary from the UI.
-
-Use `content-evidence-ethics-and-safety.md` for proof, consent, billing, privacy, and safety.
-
-## Responsive and accessibility summary
-
-- Preserve hierarchy and primary actions at narrow, intermediate, and wide widths.
-- Test wrapping, overflow, long content, and localization pressure.
-- Use native semantics, keyboard-completable flows, visible focus, associated labels and errors, and non-color state cues.
-- Keep sticky and fixed regions from obscuring content or focus.
-
-Use `responsive-and-internationalization.md` and `accessibility.md` for the complete checks.
-
-## Technical and page completeness
-
-- Exercise every changed control and reachable state.
-- Inspect console, network, hydration, asset, and runtime failures when tools permit.
-- Verify page title and framework-supported metadata when page-level scope requires them.
-- Check rendering, dependency, media, and resilience risks with `performance-and-resilience.md`.
-- Tie every completion claim to the evidence types in `verification-and-reporting.md`.
+- For controls, reachable states, forms, and data displays, use `interaction-states.md`, `forms-and-validation.md`, and `tables-and-data-visualization.md` as applicable.
+- For product language, claims, fixtures, consent, billing, privacy, and safety, use `content-evidence-ethics-and-safety.md`.
+- For viewport behavior, localization, semantics, keyboard access, focus, labels, and non-color cues, use `responsive-and-internationalization.md` and `accessibility.md`.
+- For runtime, metadata, rendering, dependency, media, and resilience checks, use `performance-and-resilience.md`; classify completion evidence with `verification-and-reporting.md`.
 
 ## Audit severity and output
 

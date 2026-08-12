@@ -5,3 +5,7 @@ __pycache__/
 CONTEXT.md
 CONTEXT-MAP.md
 **/docs/adr/
+
+# Local Codex agent configuration
+/.codex/
+/AGENTS.md

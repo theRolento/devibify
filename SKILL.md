@@ -1,24 +1,18 @@
 ---
 name: devibify
-description: "Use this skill when implementing, refactoring, or auditing web interfaces that require product-specific hierarchy, design-system coherence, complete interaction and data states, responsive and accessibility hardening, content integrity, or removal of generic AI-generated patterns. Do not use for backend-only work, purely mechanical frontend edits, copy-only proofreading, or isolated token changes that require no UX or product-design judgment."
+description: "Design, build, refactor, or audit browser-visible web UI with product-specific hierarchy, coherent systems, complete states, accessibility, responsive behavior, content integrity, and evidence-based verification. Use for any web page, component, flow, dashboard, form, landing page, or frontend whose visible experience changes. Do not use for backend-only work, copy proofreading, or exact mechanical code, token, or asset operations that require no product-design judgment."
 ---
 
 # Devibify
 
-Treat each web interface as a product system shaped by real users, content, workflows, and constraints. Produce a scoped audit or implementation that is product-specific, coherent, complete across reachable states, accessible, resilient, and supported by bounded evidence.
+Treat each web interface as a product system shaped by real users, content, workflows, and constraints. Ground substantive visible work in a design thesis: the user, primary task, and product character the interface serves.
 
 ## Non-negotiable guardrails
 
 - Keep `AUDIT` read-only. Create only a report artifact the user explicitly requests.
-- Keep changes inside requested scope, necessary dependency scope, and introduced regression scope. Report adjacent pre-existing issues separately.
 - Preserve existing user work. Run Git or repository-management commands only when the user explicitly requests them.
-- Classify missing information instead of inventing product facts, proof, data, routes, permissions, APIs, persistence, or successful behavior.
-- Preserve coherent existing systems, accepted product behavior, and explicit design references.
-- Preserve justified brand expression. Prefer the least visual complexity needed to clarify hierarchy, behavior, state, and intended brand character; treat restraint as a tool rather than a universal style.
+- Preserve coherent existing systems, accepted product behavior, explicit design references, and justified brand expression. Use the least visual complexity needed to clarify hierarchy, behavior, state, and intended character.
 - Use native semantics before ARIA and implement keyboard behavior explicitly where native behavior is unavailable.
-- Implement every state the changed surface can actually reach.
-- Reuse current dependencies and primitives. Add a dependency only when the task or repository establishes a real need.
-- Tie completion claims to evidence. Report unexecuted checks as exact gaps, never as verified.
 
 ## Select the mode
 
@@ -102,7 +96,8 @@ Identify the primary user and task, content and data sources of truth, constrain
 
 For non-trivial work, record:
 
-- mode, primary user, task, and surface purpose;
+- design thesis: primary user, task, and product character, supported by observed evidence;
+- mode and surface purpose;
 - requested scope, dependency scope, and out-of-scope boundaries;
 - source of truth and information hierarchy;
 - primary and secondary actions;
@@ -117,7 +112,9 @@ For non-trivial work, record:
 
 For a narrow fix, reduce this to a concise scope and behavior note.
 
-**Gate:** Give every visible region and control a purpose, every reachable state an intended outcome, and every material claim a possible evidence path or explicit verification bound.
+When a net-new surface has no evidence for product character, ask one focused question before choosing a visual direction.
+
+**Gate:** State an evidence-backed design thesis for every substantive task, or one sentence for a narrow fix. Give every visible region and control a purpose, every reachable state an intended outcome, and every material claim a possible evidence path or explicit verification bound.
 
 ### 4. Load applicable references
 
@@ -177,16 +174,3 @@ For audits or non-trivial changes in supported file types, optionally run [`scri
 Use the structured templates in `references/verification-and-reporting.md` for audits and non-trivial implementations. Keep tiny-fix reports concise but preserve the evidence boundary.
 
 Stop short of broad claims such as fully accessible, production-ready, pixel-perfect, responsive across all devices, performance optimized, no regressions, secure, or compliant unless the evidence covers that full claim. State bounded results, exact gaps, and residual risks.
-
-## Failure conditions
-
-Treat the run as incomplete when any applicable condition remains:
-
-- the primary mode or change authority is ambiguous;
-- audit mode modified product files;
-- scope expanded without authorization;
-- a material unknown became a product fact;
-- a reachable state or visible control lacks defined behavior;
-- established authorization, accessibility, content integrity, or design-system constraints were silently weakened;
-- a relevant failed check remains unexplained;
-- a material completion claim lacks evidence or an explicit unverified label.
