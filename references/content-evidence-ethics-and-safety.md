@@ -15,10 +15,9 @@
 
 - Trace testimonials, logos, reviews, metrics, charts, avatars, and activity to an attributable source.
 - Omit proof when evidence is unavailable.
-- Label fixtures as synthetic or demo data.
+- Label synthetic data as such and keep it out of production claims.
 - Keep decorative UI from impersonating measurement.
 - Keep fabricated customer counts and urgency out of the interface.
-- Keep code fixtures from being presented as production metrics.
 
 ## Ethical UX
 
@@ -29,7 +28,7 @@ Show costs, recurring commitments, consequences, cancellation paths, and data-sh
 ## Privacy
 
 - Minimize collected and displayed data.
-- Keep production personal data out of fixtures.
+- Keep production personal data out of synthetic data.
 - Keep secrets, tokens, credentials, and private identifiers out of UI, logs, source, screenshots, and URLs.
 - Use appropriate masking and reveal behavior.
 - Make privacy choices reflect real product behavior.

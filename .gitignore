@@ -2,8 +2,8 @@ __pycache__/
 *.py[cod]
 
 # Local grill-with-docs artifacts
-CONTEXT.md
-CONTEXT-MAP.md
+GLOSSARY.md
+GLOSSARY-MAP.md
 **/docs/adr/
 
 # Local Codex agent configuration

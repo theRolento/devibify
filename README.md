@@ -1,85 +1,74 @@
 # Devibify
 
-Devibify is a Codex skill for implementing, refactoring, and auditing web interfaces that need product-design judgment. It keeps work within scope, grounds decisions in product evidence, preserves coherent design systems, covers reachable states, and reports what verification supports.
+Devibify is an [Agent Skill](https://agentskills.io) for Claude Code and Codex that designs, builds, refactors, and audits web interfaces with product-design judgment. It replaces generic AI-generated structure with product-specific hierarchy, keeps work within scope, preserves coherent design systems, covers reachable states, and reports what verification supports.
 
 Use it for UI work such as:
 
 - auditing a product surface without changing files;
 - fixing a focused interaction or accessibility defect;
-- implementing a page, form, table, dashboard, or flow;
+- building a page, form, table, dashboard, or flow;
 - refactoring shared UI without changing accepted behavior;
-- translating an approved visual reference into code;
-- replacing generic AI-generated structure with product-specific hierarchy.
+- implementing an approved screenshot or Figma design;
+- turning a generic AI-looking page into one specific to the product.
 
-Devibify does not target backend-only work, mechanical frontend edits, copy proofreading, or exact token substitutions that require no UX decision.
+Devibify does not target backend-only work, copy proofreading, or exact mechanical edits such as renames, token values, or asset conversions.
 
 ## Install
 
-Install the whole repository at:
+### Claude Code: plugin
 
 ```text
-$CODEX_HOME/skills/devibify
+/plugin marketplace add theRolento/devibify
+/plugin install devibify@devibify
 ```
 
-The default location is `~/.codex/skills/devibify`. Keep the repository structure intact. Codex starts with `SKILL.md` and loads supporting references when relevant; tests and eval data remain maintenance assets.
+Claude Code 2.1.275 or later also accepts the one-step form `/plugin install devibify --marketplace theRolento/devibify`. The plugin skill is invoked as `/devibify:devibify`.
+
+### Claude Code: personal skill
+
+```bash
+git clone https://github.com/theRolento/devibify.git ~/.claude/skills/devibify
+```
+
+Invoke it as `/devibify`.
+
+### Codex
+
+```bash
+git clone https://github.com/theRolento/devibify.git "${CODEX_HOME:-$HOME/.codex}/skills/devibify"
+```
+
+Invoke it as `$devibify`.
+
+Either agent also activates the skill on its own for matching UI work. Keep the repository structure intact: the agent reads `SKILL.md` first and loads reference files only when a task needs them. Update a clone with `git pull`.
 
 ## Invoke
 
-Call the skill by name when you want to force activation:
+Name the skill to force activation:
 
 ```text
-Use $devibify to audit this checkout flow. Return findings only, cite the evidence for each finding, and do not change files.
+/devibify audit this checkout flow. Return findings only, cite the evidence for each finding, and do not change files.
 ```
 
-The skill also allows implicit invocation for matching frontend work. Its description excludes backend work and mechanical edits.
+In Codex, write `$devibify` in place of `/devibify`.
 
-## Operating modes
+## How it works
 
-See the [mode definitions and selection rules](SKILL.md#select-the-mode) in `SKILL.md`.
+Devibify picks one of four modes (Audit, Fix, Build, Refactor), grounds the work in a design thesis (primary user, primary task, product character), writes a proportional UI contract, and verifies with labelled evidence. See [`SKILL.md`](SKILL.md) for the workflow and [`references/visual-direction.md`](references/visual-direction.md) for the generic patterns it replaces.
 
 ## Repository layout
 
-### Runtime surface
+The repository root is the skill root, so a clone installs the skill directly for both agents.
 
-- `SKILL.md` contains activation boundaries, guardrails, modes, workflow gates, and reference routing.
-- `agents/openai.yaml` contains Codex interface metadata and implicit-invocation policy.
-- `references/` contains task-specific guidance loaded through the routing table.
-- `scripts/scan-ui-smells.py` provides an optional, read-only source scanner. Its findings require human or agent review.
-
-### Assurance harness
-
-- `scripts/validate-devibify.py` checks package structure, metadata, links, encoding, eval schemas, and release counts.
-- `tests/` covers the validator and every scanner rule with standard-library unit tests.
-- `evals/` records trigger expectations, behavior cases, critical gates, and the scoring rubric.
-
-The eval corpus specifies expected behavior. This repository has no runtime Codex evaluator, so it does not claim that a model has passed those cases. The validator checks eval structure and coverage. These maintenance files belong in the source repository even though Codex does not need them during a skill run.
-
-Regular users do not need to run the assurance harness. It is included for maintainers, contributors, and anyone who wants to verify the repository.
-
-## Validate
-
-Run the repository checks from its root:
-
-```bash
-python scripts/validate-devibify.py .
-python scripts/validate-devibify.py . --json
-python -m unittest discover -s tests -p 'test_*.py'
-python -m py_compile scripts/validate-devibify.py scripts/scan-ui-smells.py
-```
-
-Scan supported UI source files with:
-
-```bash
-python scripts/scan-ui-smells.py <path>
-python scripts/scan-ui-smells.py <path> --json
-python scripts/scan-ui-smells.py <path> --strict
-```
-
-The scanner reports findings without editing files. Default mode returns status 0 when it finds issues. Strict mode returns status 1 when it finds a high-confidence issue.
+- `SKILL.md`: modes, scope, workflow, conflict handling, and reference routing.
+- `references/`: task-specific reference files loaded on demand.
+- `scripts/scan-ui-smells.py`: an optional, read-only source scanner for HTML, JSX, TSX, Vue, Svelte, CSS, SCSS, and Less, which the agent runs during audits and builds. It needs Python 3 and never edits files; its findings are advisory.
+- `agents/openai.yaml`: Codex interface metadata and implicit-invocation policy. Claude Code ignores it.
+- `.claude-plugin/marketplace.json`: the Claude Code plugin marketplace entry.
 
 ## History
 
-See [CHANGELOG.md](CHANGELOG.md) for the v1 and v2 feature summaries.
+See [CHANGELOG.md](CHANGELOG.md).
 
 ## Attribution
 

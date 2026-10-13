@@ -34,7 +34,7 @@ Preserve comparison. Converting every table row into a card is not an acceptable
 
 ## Charts and metrics
 
-- Use real data or clearly labelled fixture data.
+- Use real data or labelled synthetic data.
 - Show source or provenance, time range, freshness, and units.
 - Use honest axes and scales.
 - Explain missing and partial data.

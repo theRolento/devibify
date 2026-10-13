@@ -4,12 +4,10 @@
 
 - Choose breakpoints from content pressure rather than device names.
 - Define intentional narrow, intermediate, and wide behavior.
-- Inspect very narrow reflow at 320 CSS pixels where applicable.
 - Prevent accidental horizontal page scroll; preserve intentional overflow for tables, code, timelines, maps, and other two-dimensional content.
 - Keep primary actions accessible.
 - Let headings, labels, controls, badges, and errors wrap without clipping.
 - Avoid fixed-height text containers that fail under wrapping.
-- Keep sticky surfaces from obscuring focused content.
 - Preserve usable touch targets.
 - Check that mobile keyboards do not hide active fields or submission controls when testable.
 - Respect safe-area insets where fixed UI meets viewport edges.
@@ -19,10 +17,6 @@
 ## Stress content
 
 Test applicable layouts with long headings, long button labels, long names, unbroken identifiers and URLs, zero/one/many items, long errors, substantially expanded translated strings, variable row heights, and large localized numbers.
-
-## Zoom and text
-
-Use source or browser inspection to check 200 percent text size, zoom and reflow at the WCAG-equivalent narrow viewport, user text-spacing overrides, and browser minimum font settings where practical.
 
 ## Internationalization
 
@@ -41,7 +35,3 @@ Use source or browser inspection to check 200 percent text size, zoom and reflow
 - Tolerate substantial text expansion.
 - Preserve accessible names after translation.
 - Keep localizable text out of images when localization is expected.
-
-## Responsive evidence
-
-Name the viewport widths, zoom levels, text conditions, directions, or content stresses actually inspected. A bare claim that the UI is "responsive" is not evidence.

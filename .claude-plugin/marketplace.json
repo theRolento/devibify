@@ -1,0 +1,17 @@
+{
+  "name": "devibify",
+  "description": "Devibify, an Agent Skill for product-specific web UI design, implementation, and audits.",
+  "owner": {
+    "name": "theRolento"
+  },
+  "plugins": [
+    {
+      "name": "devibify",
+      "source": ".",
+      "description": "Design, build, refactor, or audit browser-visible web UI so it reads as product-specific instead of generic AI output.",
+      "homepage": "https://github.com/theRolento/devibify",
+      "license": "MIT",
+      "category": "design"
+    }
+  ]
+}

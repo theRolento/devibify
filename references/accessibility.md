@@ -4,8 +4,6 @@
 
 Default production web UI to WCAG 2.2 Level AA. Apply stricter repository, contractual, or jurisdictional requirements when present. Use native HTML before ARIA, and use ARIA only when native semantics are insufficient. Follow the WAI-ARIA Authoring Practices for custom widgets; ARIA semantics alone do not implement keyboard behavior.
 
-Automated tools identify only some failures and do not establish conformance. Reserve claims such as "fully accessible" for evidence that actually supports them.
-
 ## Structure and semantics
 
 - Set the document language and a meaningful page title.
@@ -81,17 +79,3 @@ Automated tools identify only some failures and do not establish conformance. Re
 - Avoid memory tests or puzzles without alternatives.
 - Use correct autocomplete tokens.
 - Give reveal-password controls state-specific accessible names.
-
-## Verification matrix
-
-Record each applicable row separately; never substitute one method for another.
-
-| Method | What it can evidence | Result |
-|---|---|---|
-| Source inspection | Semantics, attributes, relationships, likely behavior | |
-| Automated accessibility scan | Tool-detectable violations in exercised states | |
-| Keyboard inspection | Order, operation, traps, dismissal | |
-| Focus inspection | Visibility, placement, containment, return | |
-| Screen-reader inspection, if performed | Names, roles, states, announcements, reading order | |
-| Zoom and reflow inspection | Text resizing, 320 CSS pixel reflow, clipping, overflow | |
-| Not verified | Exact method and residual risk | |

@@ -1,176 +1,98 @@
 ---
 name: devibify
-description: "Design, build, refactor, or audit browser-visible web UI with product-specific hierarchy, coherent systems, complete states, accessibility, responsive behavior, content integrity, and evidence-based verification. Use for any web page, component, flow, dashboard, form, landing page, or frontend whose visible experience changes. Do not use for backend-only work, copy proofreading, or exact mechanical code, token, or asset operations that require no product-design judgment."
+description: "Design, build, refactor, or audit browser-visible web UI so it reads as product-specific instead of generic AI output, with coherent design systems, complete states, accessibility, responsive behavior, and evidence-backed verification. Use for any web page, component, flow, dashboard, form, or landing page whose visible experience changes or is reviewed. Do not use for backend-only work, copy proofreading, or exact mechanical edits such as renames, token values, or asset conversions."
 ---
 
 # Devibify
 
-Treat each web interface as a product system shaped by real users, content, workflows, and constraints. Ground substantive visible work in a design thesis: the user, primary task, and product character the interface serves.
+Treat each interface as a product system shaped by real users, content, workflows, and constraints. Ground every visible choice in a **design thesis**: the primary user, their primary task, and the product character the interface serves. Generic AI defaults are the failure this skill prevents; [`references/visual-direction.md`](references/visual-direction.md) names them and their replacements.
 
-## Non-negotiable guardrails
+## Pick the mode
 
-- Keep `AUDIT` read-only. Create only a report artifact the user explicitly requests.
-- Preserve existing user work. Run Git or repository-management commands only when the user explicitly requests them.
-- Preserve coherent existing systems, accepted product behavior, explicit design references, and justified brand expression. Use the least visual complexity needed to clarify hierarchy, behavior, state, and intended character.
-- Use native semantics before ARIA and implement keyboard behavior explicitly where native behavior is unavailable.
-
-## Select the mode
-
-Choose one primary mode before broad inspection or modification. Name a secondary mode only when useful, and announce any later mode change.
-
-| Mode | Use it for | Required behavior |
+| Mode | Use it for | Boundary |
 |---|---|---|
-| `AUDIT` | Inspect and report | Keep product files unchanged. Prioritize findings by severity, location, evidence, impact, correction, scope, and verification status. |
-| `NARROW_FIX` | Correct a defined component, state, or localized defect | Limit changes to the requested surface and necessary dependencies. Fix introduced regressions; report adjacent issues. |
-| `FEATURE_IMPLEMENTATION` | Add or substantially change a page, flow, component family, or behavior | Define a UI contract, inspect reuse and data contracts, and cover all reachable states plus responsive, keyboard, focus, error, and verification behavior. |
-| `NET_NEW_DESIGN` | Design without an established reference | Establish product, user, task, content, constraints, visual and interaction theses, and density. When requirements do not determine structure, compare two directions that differ in hierarchy, workflow, density, navigation, or content emphasis. |
-| `REFACTOR` | Improve structure or design-system coherence | Preserve visible behavior and visual intent unless authorized otherwise. Identify shared blast radius and inspect representative consumers. |
-| `REFERENCE_FIDELITY` | Implement against an approved screenshot, design, or specification | Let the reference control hierarchy and visual intent within repository and accessibility constraints. Reuse existing components, verify target and responsive viewports, and record deviations and unspecified behavior. |
+| Audit | Inspect and report | Product files stay unchanged. Write only a report the user asks for. |
+| Fix | A defined component, state, or localized defect | Change the requested surface and its necessary dependencies. |
+| Build | A new or substantially changed page, flow, component family, or behavior | Cover every reachable state, responsive behavior, keyboard, and focus. |
+| Refactor | Structure or design-system coherence | Keep visible behavior and visual intent unless the user authorizes a change. Inspect consumers of every shared component you touch. |
 
-Explicit `$devibify` invocation still applies to narrow work; keep the process proportional.
+Name the mode when you start and announce any change. Scale the process to the mode: a Fix gets a one-sentence thesis and a scope note; a Build gets the full UI contract.
 
-## Apply priority and scope
+**Design reference.** Classify any screenshot, Figma frame, or specification as authoritative, inspirational, or absent. An authoritative design reference controls hierarchy and visual intent within accessibility and repository constraints: reuse existing components to match it, verify at its viewport plus narrow and wide widths, and record deviations and every state it leaves unspecified (errors, empty, loading, mobile). Derive unspecified states from repository patterns.
 
-Apply instructions in this order:
+## Scope
 
-1. Higher-level system, organization, and repository instructions, including applicable `AGENTS.md` files.
-2. The user's explicit request, acceptance criteria, and approved product or design references.
-3. Established product behavior, content sources, data contracts, and coherent design-system conventions.
-4. Devibify defaults and heuristics.
+- **Requested:** the surface and outcome the user asked for.
+- **Necessary dependency:** the minimum shared code, token, test, or route a safe result needs.
+- **Introduced regression:** anything your change breaks. Fix it.
+- **Adjacent issue:** a pre-existing defect you notice. Report it and leave it unchanged unless it blocks the request.
 
-Surface accessibility, security, privacy, legal, and deceptive-design risks even when a lower-priority request conflicts with them. Preserve intent through the safest compliant implementation and report any deviation; never silently weaken accessibility or violate an explicit requirement.
+A local defect gets a local fix: the redesign, global token change, component-library swap, new route or endpoint, and copy or navigation change each need the user's request. Intentional brand expression, including unconventional or maximalist styles, stays.
 
-Use four scope categories:
+## Workflow
 
-1. **Requested:** The explicitly requested surface and outcome.
-2. **Necessary dependency:** The minimum supporting code, shared component, token, test, or route required for a safe result.
-3. **Introduced regression:** Every defect caused by the implementation; fix it.
-4. **Adjacent pre-existing:** Unrelated defects found during inspection; report them and leave them unchanged unless they block the request.
+### 1. Gather evidence
 
-Keep an audit from becoming implementation. Keep a local defect from causing an unauthorized redesign, global token change, component-library replacement, route or endpoint creation, or product-copy and navigation change. Keep unconventional but intentional brand expression intact.
+Inspect the relevant routes, neighboring screens, shared components and their consumers, tokens and theme, content and localization sources, data contracts, permissions, and existing tests and browser tooling. Label each material fact as observed, inferred (with its evidence), or unknown. Take the smallest reversible assumption for a low-risk local decision and state it; ask when an unknown would force a risky or irreversible choice about architecture, content, permissions, navigation, or business behavior.
 
-## Classify information
+### 2. Write the UI contract
 
-- **Observed:** Support it directly with the user request, repository, runtime, data contract, approved design, or authoritative source.
-- **Inferred:** Derive a bounded conclusion from observed evidence; state the evidence and uncertainty when it affects architecture, content, behavior, or scope.
-- **Unknown:** Leave unestablished information unknown.
-- **Fixture:** Label synthetic development or test data clearly and keep it non-sensitive.
+For a Build or Refactor, record:
 
-Use the smallest reversible assumption for a low-risk local decision. State an assumption before it affects architecture, content, permissions, navigation, or business behavior. Omit unsupported proof. Continue safely around noncritical unknowns; ask when an unknown would force a risky or irreversible choice.
-
-## Identify non-trivial work
-
-Treat work as non-trivial when any of these conditions applies:
-
-- introduce or substantially change a page, route, flow, or reusable component;
-- affect more than one interaction or data state;
-- involve asynchronous, data-backed, permission-dependent, or destructive behavior;
-- change navigation or information architecture;
-- require a responsive transformation;
-- change form validation, focus management, or error recovery;
-- introduce a visual primitive, token, or dependency;
-- affect multiple routes or products through a shared component;
-- involve a custom widget or complex accessibility pattern;
-- translate a visual reference into code;
-- materially affect performance, privacy, security, consent, billing, or data integrity.
-
-Treat a copy correction, exact token substitution, mechanical rename, or isolated non-behavioral style fix as narrow unless evidence shows broader impact.
-
-## Run the workflow
-
-### 1. Establish authority
-
-Read applicable `AGENTS.md` and repository guidance. Identify the requested outcome, primary mode, requested and prohibited scope, change authority, and whether a visual reference is authoritative, inspirational, or absent. Avoid broad modification until these are explicit.
-
-**Gate:** Name the mode, outcome, requested scope, prohibited scope, and change authority.
-
-### 2. Inspect relevant product evidence
-
-Inspect only relevant routes, neighboring screens, shared components and consumers, tokens and theme, content and localization sources, data types and contracts, loaders and actions, permissions, scripts and tests, browser tooling, accessibility patterns, and supplied references.
-
-Identify the primary user and task, content and data sources of truth, constraints, reuse targets, shared blast radius, verification capabilities, and material unknowns.
-
-**Gate:** Support product context with observed evidence or classify each material gap as unknown.
-
-### 3. Define a proportional UI contract
-
-For non-trivial work, record:
-
-- design thesis: primary user, task, and product character, supported by observed evidence;
-- mode and surface purpose;
-- requested scope, dependency scope, and out-of-scope boundaries;
-- source of truth and information hierarchy;
+- the design thesis and its evidence;
+- the information hierarchy and the source of truth for each piece of content;
 - primary and secondary actions;
-- layout regions, component inventory, and reuse plan;
-- reachable interaction and data states;
-- responsive transformations;
+- layout regions and the components reused for them;
+- reachable states and the intended outcome of each;
+- narrow, intermediate, and wide behavior;
 - keyboard and focus behavior;
-- content and localization constraints;
-- visual-system constraints and density: compact, balanced, paced, or immersive;
-- observed facts, inferences, unknowns, and fixtures;
-- verification plan.
+- density: compact, balanced, paced, or immersive;
+- the verification plan.
 
-For a narrow fix, reduce this to a concise scope and behavior note.
+For a Fix, write one sentence of thesis and scope. For an Audit, the thesis frames which findings matter.
 
-When a net-new surface has no evidence for product character, ask one focused question before choosing a visual direction.
+### 3. Choose the direction
 
-**Gate:** State an evidence-backed design thesis for every substantive task, or one sentence for a narrow fix. Give every visible region and control a purpose, every reachable state an intended outcome, and every material claim a possible evidence path or explicit verification bound.
+Keep coherent existing patterns. Build hierarchy with layout, type, spacing, and contrast before decoration, and give every visual device a reason: brand, structure, affordance, status, or narrative.
 
-### 4. Load applicable references
+For a Build with no design reference and no evidence of product character, ask one focused question about that character before choosing a visual direction. When requirements leave the structure open, describe two directions in a few lines each that differ in hierarchy, workflow, density, or navigation, pick one with its rationale, and proceed; the user can redirect.
 
-Read only what applies. Use the routing table below; do not load the whole reference directory for a narrow task.
+### 4. Implement
 
-### 5. Choose the product direction
+Reuse existing components, tokens, icons, and dependencies. Use native semantics before ARIA, and implement keyboard behavior wherever native behavior is unavailable. Give every control a real behavior and every link a real destination. Give asynchronous actions immediate pending feedback, a duplicate-submission guard, recoverable errors that keep the user's input, and a success state shown only after the action succeeds. Keep empty states truthful, with an action only when the user can change the condition. Show only attributable proof such as logos, testimonials, and metrics; while real data is unavailable, use **synthetic data** labelled as such.
 
-Preserve coherent existing patterns. Build hierarchy with composition, layout, typography, spacing, and contrast before decoration. Use visual devices only for brand, structure, affordance, status, or narrative. Treat high-frequency AI patterns as hypotheses, not defaults. Compare two structural directions only for unconstrained net-new work.
+### 5. Verify and report
 
-**Gate:** Tie every new structural or visual choice to the established system or a product-specific rationale.
+Run the repository's relevant checks. When a browser is available, exercise the primary flow, every changed control and reachable state, keyboard and focus, and widths of 320px, an intermediate size, and a wide desktop; inspect console and network failures. Attach to every completion claim its evidence type: executed check, browser-observed, source inspection, inference, or not verified with the cause. Claims such as "fully accessible", "pixel-perfect", "production-ready", or "responsive on all devices" need evidence covering the whole claim; otherwise state the bounded result.
 
-### 6. Implement behavior and content
+The report states the mode, what changed or was audited, the key design decisions, each verification with its evidence type, what remains unverified with its residual risk, and adjacent issues left unchanged. Audit findings use the format in [`references/ui-audit.md`](references/ui-audit.md).
 
-Reuse components, tokens, icons, and dependencies. Use semantic controls. Implement reachable states, immediate accurate asynchronous feedback, duplicate-submission guards, recoverable error behavior, and input preservation. Make empty states truthful and actionable only when users can change the condition. Keep links real, controls functional, authorization and data contracts intact, and fixtures labelled. Add metadata only when page scope and framework support require it.
+## Conflicts
 
-**Gate:** Give every visible control a real purpose and behavior, or mark it explicitly as development-only nonfunctional scaffolding.
+Host instructions (system, `AGENTS.md`, `CLAUDE.md`) and the user's explicit request outrank these defaults. When a request would weaken accessibility, security, privacy, or honesty, keep its intent through the safest compliant version and report the deviation:
 
-### 7. Audit the changed surface
+- "Hide the focus rings" → keep a visible focus treatment that fits the visual design.
+- "Hide the delete button and drop the server permission check" → hiding is presentation; the server-side check stays.
+- "Make accept dominant and bury reject in a text link" → give refusal comparable prominence.
+- "Add customer logos and adoption metrics" without a source → leave them out and rebuild the hierarchy around sourced content.
+- No browser available → run source and command checks and mark rendering, responsive behavior, keyboard, and focus as not verified.
 
-Apply relevant audit categories and specialized references. Fix in-scope failures and introduced regressions. Report adjacent pre-existing failures. Record categories that could not be verified. Treat heuristics as contextual checks rather than blanket change mandates.
+## Reference files
 
-**Gate:** Account for every category relevant to the changed surface, including those left unverified.
+Load each reference file whose condition matches the task:
 
-### 8. Verify with evidence
-
-Discover and run relevant repository commands. When browser capability exists, exercise the primary flow, changed controls, reachable states, keyboard and focus, and representative very narrow, intermediate, and wide conditions. Inspect console and network failures and run existing accessibility checks when available.
-
-Classify claims as executed automated check, browser-observed, visual inspection, keyboard and focus inspection, automated accessibility check, source inspection, inference, or not verified.
-
-**Gate:** Attach evidence to every material completion claim or list it as unverified with cause and residual risk.
-
-### 9. Report proportionally
-
-Report the mode, requested and out-of-scope surfaces, changed files or audit locations, key product decisions, information classifications and fixtures, exact verification results, accessibility and responsive checks, gaps, residual risks, and adjacent issues left unchanged.
-
-**Gate:** Let the report distinguish what was changed, observed, executed, inferred, and not verified without unsupported completion language.
-
-## Route references
-
-| Reference | Load when |
+| Reference file | Load when |
 |---|---|
-| [`references/ui-audit.md`](references/ui-audit.md) | Any audit, non-trivial page or flow change, or final product-quality pass |
-| [`references/accessibility.md`](references/accessibility.md) | Any interactive UI, accessibility request, custom widget, form, navigation, dialog, page-level change, or audit |
-| [`references/interaction-states.md`](references/interaction-states.md) | Any asynchronous, data-backed, permission-dependent, editable, upload, destructive, or multi-state control |
-| [`references/forms-and-validation.md`](references/forms-and-validation.md) | Any form, search input with validation, checkout, authentication, account, upload, or data-entry flow |
-| [`references/responsive-and-internationalization.md`](references/responsive-and-internationalization.md) | Any layout, typography, navigation, page, localized content, long text, mobile behavior, or right-to-left concern |
-| [`references/tables-and-data-visualization.md`](references/tables-and-data-visualization.md) | Any table, dense list, chart, KPI, report, dashboard, analytics, comparison, or data export surface |
-| [`references/performance-and-resilience.md`](references/performance-and-resilience.md) | Any page-level work, media, animation, large list, client rendering, data fetching, slow network, offline, or performance-sensitive flow |
-| [`references/content-evidence-ethics-and-safety.md`](references/content-evidence-ethics-and-safety.md) | Marketing, proof, metrics, social content, consent, billing, subscriptions, privacy, permissions, destructive actions, user-generated content, or AI-generated output |
-| [`references/verification-and-reporting.md`](references/verification-and-reporting.md) | Any audit or non-trivial implementation before final reporting |
-| [`references/calibration-examples.md`](references/calibration-examples.md) | Mode, scope, fidelity, brand, fixture, or conflict handling is ambiguous |
+| [`references/visual-direction.md`](references/visual-direction.md) | Build, any visible restyle, or an audit of visual quality |
+| [`references/examples.md`](references/examples.md) | Build or restyle of a dashboard, landing page, or form, or whenever output risks looking generic |
+| [`references/ui-audit.md`](references/ui-audit.md) | Audit, or the final quality pass of a Build |
+| [`references/accessibility.md`](references/accessibility.md) | Custom widgets, dialogs, menus, complex keyboard or focus behavior, authentication, or an accessibility audit |
+| [`references/interaction-states.md`](references/interaction-states.md) | Asynchronous, data-backed, permission-dependent, editable, or destructive controls |
+| [`references/forms-and-validation.md`](references/forms-and-validation.md) | Forms, checkout, authentication, upload, or data entry |
+| [`references/responsive-and-internationalization.md`](references/responsive-and-internationalization.md) | New layouts or navigation, mobile transformations, localization, or right-to-left text |
+| [`references/tables-and-data-visualization.md`](references/tables-and-data-visualization.md) | Tables, dense lists, charts, KPIs, or dashboards |
+| [`references/performance-and-resilience.md`](references/performance-and-resilience.md) | Media-heavy pages, animation, large lists, data fetching, or slow and offline networks |
+| [`references/content-evidence-ethics-and-safety.md`](references/content-evidence-ethics-and-safety.md) | Marketing copy, proof, consent, billing, privacy, destructive actions, or AI-generated output |
+| [`references/verification-and-reporting.md`](references/verification-and-reporting.md) | An audit report, or a verification record for a Build or Refactor |
 
-For audits or non-trivial changes in supported file types, optionally run [`scripts/scan-ui-smells.py`](scripts/scan-ui-smells.py). Treat every result as an advisory prompt requiring context, not an automatic fix.
-
-## Completion standard
-
-Use the structured templates in `references/verification-and-reporting.md` for audits and non-trivial implementations. Keep tiny-fix reports concise but preserve the evidence boundary.
-
-Stop short of broad claims such as fully accessible, production-ready, pixel-perfect, responsive across all devices, performance optimized, no regressions, secure, or compliant unless the evidence covers that full claim. State bounded results, exact gaps, and residual risks.
+For an audit or a Build, optionally run [`scripts/scan-ui-smells.py`](scripts/scan-ui-smells.py) `<path>` (add `--json` or `--strict`) on HTML, JSX, TSX, Vue, Svelte, CSS, SCSS, or Less sources. Each finding is a prompt to inspect in context, not an automatic fix.

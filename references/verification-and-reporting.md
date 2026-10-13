@@ -2,109 +2,37 @@
 
 ## Evidence types
 
-- **Executed automated check:** A command or test was run and its exact result was observed.
-- **Browser-observed:** Behavior was directly exercised in a rendered browser.
-- **Visual inspection:** Layout or fidelity was directly inspected.
-- **Keyboard and focus inspection:** Interaction was exercised without a pointer.
-- **Automated accessibility check:** An accessibility tool was run.
-- **Source inspection:** Code or configuration was directly inspected.
-- **Inference:** A reasoned conclusion was not directly executed or observed.
-- **Not verified:** Environment or scope prevented validation.
+- **Executed check:** a command or test ran and its exact result was observed.
+- **Browser-observed:** behavior was exercised in a rendered browser, including visual, keyboard, and focus inspection.
+- **Automated accessibility check:** an accessibility tool ran on the exercised states; it finds only some failures and never establishes conformance.
+- **Source inspection:** code or configuration was read directly.
+- **Inference:** a reasoned conclusion not directly executed or observed.
+- **Not verified:** the environment or scope prevented validation; name the cause and the residual risk.
+
+Record each method separately; one never substitutes for another.
 
 ## Command checks
 
-Discover commands from repository scripts and guidance. Use applicable formatting, lint, typecheck, unit, component, end-to-end, production build, framework, and skill validation commands. Record exact commands and results. Do not invent command names.
+Discover commands from repository scripts and guidance: formatting, lint, typecheck, unit, component, end-to-end, production build, and framework checks. Record exact commands and results.
 
 ## Browser checks
 
-When browser capability exists:
+- Load the changed route and exercise the primary flow.
+- Exercise every changed control and reachable state.
+- Inspect 320px, an intermediate width, and a wide desktop width, plus the exact viewport of an authoritative design reference.
+- Complete the main flow with a keyboard, and inspect focus visibility, placement, containment, and return.
+- Inspect labels, error associations, contrast, and non-color state communication.
+- Inspect zoom and reflow where layout changed, and reduced-motion behavior where motion changed.
+- Inspect console errors and failed requests.
+- Capture screenshots when they add evidence.
 
-- load the changed route and exercise the primary flow;
-- exercise every changed control and reachable state;
-- inspect a very narrow or mobile, intermediate, and desktop width;
-- inspect the exact target viewport in fidelity mode;
-- inspect keyboard flow and focus;
-- inspect console and failed requests when possible;
-- capture screenshots only when they add useful evidence.
+Prefer the repository's existing Playwright or equivalent setup, and run existing automated accessibility checks when available. A single verification run needs no new persistent dependency.
 
-Prefer an existing Playwright or equivalent setup. Add no persistent dependency for a single verification run without authorization.
+## Bounded claims
 
-## Accessibility verification
-
-- Complete the main flow manually with a keyboard.
-- Inspect focus visibility, placement, containment, and return.
-- Inspect labels and error associations.
-- Review contrast and non-color state communication.
-- Inspect reflow or zoom where relevant.
-- Inspect reduced-motion behavior when motion changed.
-- Run existing automated accessibility checks when available.
-- Keep automation-only results separate from conformance claims.
-
-## Completion report template
-
-```md
-## Result
-
-- Mode:
-- Requested outcome:
-- In-scope surface:
-- Out-of-scope findings:
-
-## Changed files or audit locations
-
-- ...
-
-## Product and design decisions
-
-- ...
-
-## Facts, assumptions, unknowns, and fixtures
-
-- Observed:
-- Inferred:
-- Unknown:
-- Fixtures:
-
-## Verification
-
-| Check | Evidence type | Result | Details |
-|---|---|---|---|
-| ... | ... | ... | ... |
-
-## Accessibility and responsive checks
-
-- ...
-
-## Not verified and residual risk
-
-- ...
-
-## Adjacent issues not changed
-
-- ...
-```
-
-## Audit finding template
-
-```md
-### [ID] [Severity] Title
-
-- Category:
-- Location:
-- Observed evidence:
-- User or product impact:
-- Concrete correction:
-- Scope status:
-- Verification status:
-```
-
-## Claim boundaries
-
-Reserve claims such as "fully accessible," "production-ready," "pixel-perfect," "responsive across all devices," "performance optimized," "no regressions," "all controls work," "secure," and "compliant" for evidence that supports their full scope.
-
-Prefer bounded claims such as:
+Write claims that name their evidence:
 
 - passed the repository typecheck and build;
 - exercised the primary flow at 320px, 768px, and 1440px;
-- the existing automated accessibility test reported no violations, with manual screen-reader testing not performed;
-- matched the supplied reference at the target viewport with the listed deviations.
+- the existing automated accessibility test reported no violations; manual screen-reader testing not performed;
+- matched the supplied design reference at the target viewport with the listed deviations.
